@@ -3,8 +3,8 @@
   "modid": "PaintedStone",
   "name": "Painted Stone",
   "description": "Smear a bit of dye on rocks to give them color!",
-  "version": "Arrow",
-  "mcversion": "1.6.X",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
   "url": "insert.url.here",
   "updateUrl": "",
   "authors": [

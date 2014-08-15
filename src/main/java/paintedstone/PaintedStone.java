@@ -23,7 +23,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "PaintedStone", name = "Painted Stone", version = "Beacon")
+@Mod(modid = "PaintedStone", name = "Painted Stone", version = "1.0.0")
 public class PaintedStone
 {
     /* Define blocks, items, crucial info */
