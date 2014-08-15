@@ -5,23 +5,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.oredict.OreDictionary;
-//import tconstruct.common.TContent;
-//import tconstruct.library.TConstructRegistry;
-//import tconstruct.library.crafting.Detailing;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+//import tconstruct.common.TContent;
+//import tconstruct.library.TConstructRegistry;
+//import tconstruct.library.crafting.Detailing;
 
 @Mod(modid = "PaintedStone", name = "Painted Stone", version = "1.0.0")
 public class PaintedStone
@@ -32,37 +30,34 @@ public class PaintedStone
     {
         PHPaint.initProps(event.getSuggestedConfigurationFile());
         MinecraftForge.EVENT_BUS.register(this);
-        TConstruct = Loader.isModLoaded("TConstruct");
+        //TConstruct = Loader.isModLoaded("TConstruct");
         tab = new TabPaintedStone("paintedstone");
         //TODO Material.rock                                                                  setName
         coloredCobble = new PaintedStoneBlock(Material.rock, 2.0f, "stone_cobble", "stone.cobble").setBlockName("paintedstone.cobble");
-        GameRegistry.registerBlock(coloredCobble, PaintedStoneItem.class, "paintedstone.cobble", "PaintedStone");
+        GameRegistry.registerBlock(coloredCobble, PaintedStoneItem.class, "paintedstone.cobble");
         coloredStone = new PaintedStoneBlock(Material.rock, 1.5f, "stone_raw", "stone.raw", coloredCobble).setBlockName("paintedstone.raw");
-        GameRegistry.registerBlock(coloredStone, PaintedStoneItem.class, "paintedstone.raw", "PaintedStone");
+        GameRegistry.registerBlock(coloredStone, PaintedStoneItem.class, "paintedstone.raw");
         coloredMossCobble = new PaintedStoneBlock(Material.rock, 2.0f, "stone_mosscobble", "stone.mosscobble").setBlockName("paintedstone.mosscobble");
-        GameRegistry.registerBlock(coloredMossCobble, PaintedStoneItem.class, "paintedstone.mosscobble", "PaintedStone");
+        GameRegistry.registerBlock(coloredMossCobble, PaintedStoneItem.class, "paintedstone.mosscobble");
         coloredStoneBrick = new PaintedStoneBlock(Material.rock, 1.5f, "stone_brick", "stone.brick").setBlockName("paintedstone.brick");
-        GameRegistry.registerBlock(coloredStoneBrick, PaintedStoneItem.class, "paintedstone.brick", "PaintedStone");
+        GameRegistry.registerBlock(coloredStoneBrick, PaintedStoneItem.class, "paintedstone.brick");
         coloredMossStoneBrick = new PaintedStoneBlock(Material.rock, 1.5f, "stone_mossbrick", "stone.mossbrick").setBlockName("paintedstone.mossbrick");
-        GameRegistry.registerBlock(coloredMossStoneBrick, PaintedStoneItem.class, "paintedstone.mossbrick", "PaintedStone");
+        GameRegistry.registerBlock(coloredMossStoneBrick, PaintedStoneItem.class, "paintedstone.mossbrick");
         coloredCrackedStoneBrick = new PaintedStoneBlock(Material.rock, 1.5f, "stone_crackedbrick", "stone.crackedbrick").setBlockName("paintedstone.crackedbrick");
-        GameRegistry.registerBlock(coloredCrackedStoneBrick, PaintedStoneItem.class, "paintedstone.crackedbrick", "PaintedStone");
+        GameRegistry.registerBlock(coloredCrackedStoneBrick, PaintedStoneItem.class, "paintedstone.crackedbrick");
         coloredStoneRoad = new PaintedStoneBlock(Material.rock, 1.5f, "stone_road", "stone.road").setBlockName("paintedstone.road");
-        GameRegistry.registerBlock(coloredStoneRoad, PaintedStoneItem.class, "paintedstone.road", "PaintedStone");
+        GameRegistry.registerBlock(coloredStoneRoad, PaintedStoneItem.class, "paintedstone.road");
         coloredStoneFancyBrick = new PaintedStoneBlock(Material.rock, 1.5f, "stone_fancy", "stone.fancy").setBlockName("paintedstone.fancy");
-        GameRegistry.registerBlock(coloredStoneFancyBrick, PaintedStoneItem.class, "paintedstone.fancy", "PaintedStone");
+        GameRegistry.registerBlock(coloredStoneFancyBrick, PaintedStoneItem.class, "paintedstone.fancy");
         coloredStoneSquareBrick = new PaintedStoneBlock(Material.rock, 1.5f, "stone_square", "stone.chiseled").setBlockName("paintedstone.chiseled");
-        GameRegistry.registerBlock(coloredStoneSquareBrick, PaintedStoneItem.class, "paintedstone.chiseled", "PaintedStone");
+        GameRegistry.registerBlock(coloredStoneSquareBrick, PaintedStoneItem.class, "paintedstone.chiseled");
 
         for (int i = 0; i < 16; i++)
         {
-            //TODO addSmelting
             FurnaceRecipes.smelting().func_151393_a(coloredCobble, new ItemStack(coloredStone, 1, i), 0.2F);
             GameRegistry.addRecipe(new ItemStack(coloredStoneBrick, 4, i), "##", "##", '#', new ItemStack(coloredStone, 1, i));
-            int oreID = OreDictionary.getOreID("stone");
-            OreDictionary.registerOre(oreID, new ItemStack(coloredStone, 1, i));
-            oreID = OreDictionary.getOreID("cobblestone");
-            OreDictionary.registerOre(oreID, new ItemStack(coloredCobble, 1, i));
+            OreDictionary.registerOre("stone", new ItemStack(coloredStone, 1, i));
+            OreDictionary.registerOre("cobblestone", new ItemStack(coloredCobble, 1, i));
         }
     }
 
@@ -88,38 +83,51 @@ public class PaintedStone
     @SubscribeEvent
     public void playerInteract (PlayerInteractEvent event)
     {
+        if (event.world.isRemote)
+        {
+            return;
+        }
+
         EntityPlayer player = event.entityPlayer;
         //Dyes
         if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
         {
             ItemStack stack = player.getCurrentEquippedItem();
-            String type = OreDictionary.getOreName(OreDictionary.getOreID(stack));
-            if (type != null)
+            int[] IDs = OreDictionary.getOreIDs(stack);
+            if (IDs == null)
             {
-                type = type.toLowerCase();
-                for (int i = 0; i < 16; i++)
+                return;
+            }
+            for (int j = 0; j < IDs.length; j++)
+            {
+                String type = OreDictionary.getOreName(IDs[j]);
+                if (type != null)
                 {
-                    if (type.equals("dye" + dyeTypes[i]))
+                    type = type.toLowerCase();
+                    for (int i = 0; i < 16; i++)
                     {
-                        if (colorStoneBlocks(player.worldObj, event.x, event.y, event.z, i))
+                        if (type.equals("dye" + dyeTypes[i]))
                         {
-                            if (!player.capabilities.isCreativeMode)
+                            if (colorStoneBlocks(player.worldObj, event.x, event.y, event.z, i))
                             {
-                                stack.stackSize--;
-                                if (stack.stackSize <= 0)
-                                    player.destroyCurrentEquippedItem();
-                            }
+                                if (!player.capabilities.isCreativeMode)
+                                {
+                                    stack.stackSize--;
+                                    if (stack.stackSize <= 0)
+                                        player.destroyCurrentEquippedItem();
+                                }
 
-                            player.swingItem();
-                            if (!player.worldObj.isRemote)
-                            {
-                                Block block = Blocks.stone;
-                                //TODO stepSound.getPlaceSound(), stepSound.getVolume(), stepSound.getPitch()
-                                player.worldObj.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F),
-                                        block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+                                player.swingItem();
+                                if (!player.worldObj.isRemote)
+                                {
+                                    Block block = Blocks.stone;
+                                    //TODO stepSound.getPlaceSound(), stepSound.getVolume(), stepSound.getPitch()
+                                    player.worldObj.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F),
+                                            block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+                                }
                             }
+                            return;
                         }
-                        break;
                     }
                 }
             }
@@ -193,7 +201,7 @@ public class PaintedStone
     }
 
     public static CreativeTabs tab;
-    private boolean TConstruct;
+    //private boolean TConstruct;
     public static Block coloredStone;
     public static Block coloredCobble;
     public static Block coloredMossCobble;

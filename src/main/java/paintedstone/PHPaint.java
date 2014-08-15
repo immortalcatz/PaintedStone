@@ -1,7 +1,6 @@
 package paintedstone;
 
 import java.io.File;
-import java.io.IOException;
 
 import net.minecraftforge.common.config.Configuration;
 
