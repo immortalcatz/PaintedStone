@@ -92,6 +92,15 @@ public class PaintedStone
         //Dyes
         if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
         {
+            // Only color the blocks if the block clicked on is a valid block for coloring.
+            // (Previously the coloring was done when the player clicked with a dye on anything.
+            // I managed to color my stone brick floor while clicking with lapis in hand on a Tinker's Tool Forge ;_;)
+            Block block = event.world.getBlock(event.x, event.y, event.z);
+            if (block != Blocks.stone && block != Blocks.cobblestone && block != Blocks.mossy_cobblestone && block != Blocks.stonebrick)
+            {
+                return;
+            }
+
             ItemStack stack = player.getCurrentEquippedItem();
             int[] IDs = OreDictionary.getOreIDs(stack);
             if (IDs == null)
@@ -120,7 +129,7 @@ public class PaintedStone
                                 player.swingItem();
                                 if (!player.worldObj.isRemote)
                                 {
-                                    Block block = Blocks.stone;
+                                    block = Blocks.stone;
                                     //TODO stepSound.getPlaceSound(), stepSound.getVolume(), stepSound.getPitch()
                                     player.worldObj.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F),
                                             block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
